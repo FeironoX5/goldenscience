@@ -325,3 +325,6 @@ h1 {
   right: 20px;
   bottom: 12px;
 }
+#au, #tx {
+  transition: 0.35s;
+}

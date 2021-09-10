@@ -28,8 +28,7 @@ export class AppComponent {
       title: 'Маркетолог',
       price: 20394,
       time: '6 месяцев'
-    },
-    {
+    }, {
       title: 'Скаммер',
       price: 10699,
       time: '6 месяцев'
@@ -58,18 +57,34 @@ export class AppComponent {
   };
 
   newsNext() {
+    const tx = document.getElementById('tx')!;
+    const au = document.getElementById('au')!;
+    tx.style.opacity = '0';
+    au.style.opacity = '0';
     this.newsIndex++;
     if (this.newsIndex >= this.news.length) {
       this.newsIndex = 0;
     }
+    setTimeout(function () {
+      tx.style.opacity = '1';
+      au.style.opacity = '1';
+    }, 350);
   }
 
   newsPrev() {
+    const tx = document.getElementById('tx')!;
+    const au = document.getElementById('au')!;
+    tx.style.opacity = '0';
+    au.style.opacity = '0';
     if (this.newsIndex == 0) {
       this.newsIndex = this.news.length - 1;
     } else {
       this.newsIndex--;
     }
+    setTimeout(function () {
+      tx.style.opacity = '1';
+      au.style.opacity = '1';
+    }, 350);
   }
 
   addItem(i: number) {
