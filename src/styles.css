@@ -136,6 +136,7 @@ h1 {
   width: calc(50% - 20px - 140px);
   display: inline-block;
   margin-right: 20px;
+  margin-bottom: 17px;
   border-radius: 15px;
 }
 
@@ -309,4 +310,18 @@ h1 {
   }
 }
 
-
+.submit-button {
+  border-radius: 8px;
+  height: 46px;
+  line-height: 46px;
+  margin-top: 12px;
+  font-size: 15px;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0 20px;
+  font-weight: 600;
+  border: none;
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+}

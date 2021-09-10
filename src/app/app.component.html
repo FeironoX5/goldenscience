@@ -234,15 +234,15 @@
   <div class="course-card" *ngFor="let course of courses; let i = index">
     <h3>{{course.title}}</h3>
     <span class="course-point">{{course.time}}</span>
-    <span class="course-point">{{course.price}}</span>
-    <button *ngIf="!cart[i]" class="buy-button" (click)="cart[i] = true">
+    <span class="course-point">{{course.price.toLocaleString()}} руб/мес</span>
+    <button *ngIf="!cart.items[i]" class="buy-button" (click)="addItem(i)">
       <svg viewBox="0 0 49 51" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M24.1333 19.1856H28.8814V12.0634H36.0036V7.31531H28.8814V0.193115H24.1333V7.31531H17.0111V12.0634H24.1333V19.1856ZM14.637 40.5522C12.0256 40.5522 9.91264 42.6889 9.91264 45.3003C9.91264 47.9118 12.0256 50.0485 14.637 50.0485C17.2485 50.0485 19.3852 47.9118 19.3852 45.3003C19.3852 42.6889 17.2485 40.5522 14.637 40.5522ZM38.3777 40.5522C35.7662 40.5522 33.6533 42.6889 33.6533 45.3003C33.6533 47.9118 35.7662 50.0485 38.3777 50.0485C40.9891 50.0485 43.1258 47.9118 43.1258 45.3003C43.1258 42.6889 40.9891 40.5522 38.3777 40.5522ZM15.0406 32.8365L15.1118 32.5516L17.2485 28.6819H34.9353C36.7158 28.6819 38.2827 27.7085 39.0899 26.2366L48.2538 9.59441L44.1229 7.31531H44.0992L41.4877 12.0634L34.9353 23.9338H18.2693L17.9607 23.2928L12.6428 12.0634L10.3874 7.31531L8.15583 2.56718H0.392639V7.31531H5.14077L13.6874 25.3345L10.4824 31.1509C10.1026 31.8156 9.8889 32.5991 9.8889 33.43C9.8889 36.0415 12.0256 38.1781 14.637 38.1781H43.1258V33.43H15.6341C15.3255 33.43 15.0406 33.1689 15.0406 32.8365Z"
           fill="#040404"/>
       </svg>
     </button>
-    <button *ngIf="cart[i]" class="buy-button remove" (click)="cart[i] = false">
+    <button *ngIf="cart.items[i]" class="buy-button remove" (click)="removeItem(i)">
       <svg viewBox="0 0 56 55" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M55.2797 51.5625L7.50992 3.79279L5.6671 1.94997L3.92001 0.202881L0.880554 3.24234L11.387 13.7488L16.6762 24.9015L13.4452 30.765C13.0623 31.4351 12.8469 32.2249 12.8469 33.0625C12.8469 35.6951 15.0009 37.8491 17.6335 37.8491H35.4873L38.79 41.1518C37.5934 42.0134 36.8036 43.4254 36.8036 45.0289C36.8036 47.6615 38.9336 49.8154 41.5662 49.8154C43.1697 49.8154 44.5817 49.0257 45.4433 47.8051L52.2402 54.602L55.2797 51.5625ZM18.6386 33.0625C18.3036 33.0625 18.0403 32.7993 18.0403 32.4642L18.1121 32.177L20.2661 28.276H25.9142L30.7007 33.0625H18.6386ZM38.096 28.276C39.8909 28.276 41.4705 27.2947 42.2842 25.8109L50.8521 10.2786C51.0436 9.94351 51.1393 9.53665 51.1393 9.12979C51.1393 7.81349 50.0623 6.73652 48.746 6.73652H16.5326L38.096 28.276ZM17.6335 40.2424C15.0009 40.2424 12.8709 42.3963 12.8709 45.0289C12.8709 47.6615 15.0009 49.8154 17.6335 49.8154C20.2661 49.8154 22.42 47.6615 22.42 45.0289C22.42 42.3963 20.2661 40.2424 17.6335 40.2424Z"
@@ -251,6 +251,23 @@
     </button>
   </div>
 </section>
+<div *ngIf="cart.c > 0" style="position: fixed; background: #2A66FF; color: #FFFFFF; bottom: 0; left: 0; right: 0; height: 70px">
+  <span style="font-size: 15px; font-family: 'Montserrat', sans-serif; font-weight: 500; line-height: 70px; margin-left: 30px">{{cart.c}} {{declOfNum(cart.c, ['курс', 'курса', 'курсов'])}} · {{cart.s.toLocaleString()}} рублей к оплате</span>
+  <form method="POST" action="https://yoomoney.ru/quickpay/confirm.xml">
+    <input type="hidden" name="receiver" value="4100116193230479">
+    <input type="hidden" name="label" value="Оплата курсов">
+    <input type="hidden" name="quickpay-form" value="shop">
+    <input type="hidden" name="targets" value="Оплата курсов">
+    <input type="hidden" name="sum" [value]="cart.s" data-type="number">
+    <input type="hidden" name="comment" value="Курсы">
+    <input type="hidden" name="need-fio" value="true">
+    <input type="hidden" name="need-email" value="true">
+    <input type="hidden" name="need-phone" value="false">
+    <input type="hidden" name="need-address" value="false">
+    <input type="hidden" name="paymentType" value="PC">
+    <input class="submit-button" type="submit" value="Оплатить">
+  </form>
+</div>
 
-
+<div style="height: 70px" *ngIf="cart.c > 0"></div>
 
