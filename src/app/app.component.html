@@ -132,13 +132,21 @@
   <path
     d="M0 960.489C0 783.758 143.269 640.489 320 640.489H640V960.489C640 1137.22 496.731 1280.49 320 1280.49H0V960.489Z"
     fill="#FFE600"/>
-  <rect y="1280.49" width="640" height="640" rx="320" fill="black"/>
+  <mask id="1m">
+    <rect y="1280.49" width="640" height="640" rx="320" fill="white" />
+  </mask>
+  <image mask="url(#1m)" y="1280.49" width="640" height="640" preserveAspectRatio="xMinYMin slice" href="https://picsum.photos/200/300" />
+
   <path d="M640 960.489C640 783.758 783.269 640.489 960 640.489H1280V1280.49H640V960.489Z" fill="#FFE600"/>
   <path
     d="M640 1280.49H960C1136.73 1280.49 1280 1423.76 1280 1600.49V1920.49H960C783.269 1920.49 640 1777.22 640 1600.49V1280.49Z"
     fill="#F954A3"/>
   <path d="M1280 0.489746H1920V640.49H1600C1423.27 640.49 1280 497.221 1280 320.49V0.489746Z" fill="#F954A3"/>
-  <rect x="1280" y="640.489" width="640" height="640" rx="320" fill="black"/>
+  <mask id="2m">
+    <rect x="1280" y="640.489" width="640" height="640" rx="320" fill="white" />
+  </mask>
+  <image mask="url(#2m)" x="1280" y="640.489" width="640" height="640" preserveAspectRatio="xMinYMin slice" href="https://picsum.photos/200/300" />
+
   <path
     d="M0 320.49C0 143.759 143.269 0.489746 320 0.489746H1280V320.49C1280 497.221 1136.73 640.49 960 640.49H320C143.269 640.49 0 497.221 0 320.49Z"
     fill="#2A66FF"/>
@@ -174,7 +182,10 @@
     <path
       d="M-143.18 860.065C-143.18 765.11 -66.2035 688.134 28.7517 688.134H200.683V860.065C200.683 955.02 123.707 1032 28.7517 1032H-143.18V860.065Z"
       fill="#2A66FF"/>
-    <rect x="200.683" y="688.134" width="343.863" height="343.863" rx="171.932" fill="black"/>
+    <mask id="3m">
+      <rect x="200.683" y="688.134" width="343.863" height="343.863" rx="171.932" fill="white" />
+    </mask>
+    <image mask="url(#3m)" x="200.683" y="688.134" width="343.863" height="343.863" preserveAspectRatio="xMinYMin slice" href="https://picsum.photos/200/300" />
     <path d="M544.547 516.202C544.547 421.247 621.523 344.27 716.478 344.27H888.41V688.134H544.547V516.202Z"
           fill="#FFE600"/>
     <path
@@ -182,12 +193,18 @@
       fill="#F954A3"/>
     <path d="M888.41 0.406738H1232.27V344.27H1060.34C965.387 344.27 888.41 267.294 888.41 172.338V0.406738Z"
           fill="#F954A3"/>
-    <rect x="888.41" y="344.27" width="343.863" height="343.863" rx="171.932" fill="black"/>
+    <mask id="4m">
+      <rect x="888.41" y="344.27" width="343.863" height="343.863" rx="171.932" fill="white" />
+    </mask>
+    <image mask="url(#4m)" x="888.41" y="344.27" width="343.863" height="343.863" preserveAspectRatio="xMinYMin slice" href="https://picsum.photos/200/300" />
     <path d="M1232.27 0.406738H1404.2C1499.16 0.406738 1576.14 77.3832 1576.14 172.338V344.27H1232.27V0.406738Z"
           fill="#FFE600"/>
-    <path
-      d="M1232.27 344.27H1748.07C1843.02 344.27 1920 421.247 1920 516.202V860.065C1920 955.021 1843.02 1032 1748.07 1032H1404.2C1309.25 1032 1232.27 955.021 1232.27 860.065V344.27Z"
-      fill="black"/>
+    <mask id="5m">
+      <path
+        d="M1232.27 344.27H1748.07C1843.02 344.27 1920 421.247 1920 516.202V860.065C1920 955.021 1843.02 1032 1748.07 1032H1404.2C1309.25 1032 1232.27 955.021 1232.27 860.065V344.27Z"
+        fill="white"/>
+    </mask>
+    <image mask="url(#5m)" x="1232.273" y="344.27" width="687.726" height="687.726" preserveAspectRatio="xMinYMin slice" href="https://picsum.photos/200/300" />
     <path d="M1576.14 0.406738H1920V344.27H1748.07C1653.11 344.27 1576.14 267.294 1576.14 172.338V0.406738Z"
           fill="#2A66FF"/>
     <path
@@ -259,7 +276,7 @@
     <input type="hidden" name="quickpay-form" value="shop">
     <input type="hidden" name="targets" value="Оплата курсов">
     <input type="hidden" name="sum" [value]="cart.s" data-type="number">
-    <input type="hidden" name="comment" value="Курсы">
+    <input type="hidden" name="comment" [value]="'Вы получите доступ к ' + cart.c + ' ' + declOfNum(cart.c, ['курсу', 'курсам', 'курсам'])">
     <input type="hidden" name="need-fio" value="true">
     <input type="hidden" name="need-email" value="true">
     <input type="hidden" name="need-phone" value="false">
